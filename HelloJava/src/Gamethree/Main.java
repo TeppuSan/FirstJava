@@ -1,4 +1,4 @@
-package Gametwo;
+package Gamethree;
 
 public class Main {
     static MainWindow mainWindow;

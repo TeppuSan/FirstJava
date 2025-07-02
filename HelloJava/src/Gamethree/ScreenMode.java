@@ -1,4 +1,4 @@
-package Gametwo;
+package Gamethree;
 
 public enum ScreenMode {
     // 画面のモード

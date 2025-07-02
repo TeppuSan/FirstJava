@@ -1,15 +1,14 @@
-package DesktopJava;
+// package DesktopJava;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+// import javax.swing.JButton;
+// import javax.swing.JFrame;
 
-public class FirstPanel {
+// public class FirstPanel {
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
+// public static void main(String[] args) {
+// JFrame frame = new JFrame();
 
-        JButton button = new JButton();
+// JButton button = new JButton();
 
-    }
-}
+// }
+// }

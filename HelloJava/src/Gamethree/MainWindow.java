@@ -1,4 +1,4 @@
-package Gametwo;
+package Gamethree;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -13,12 +13,13 @@ public class MainWindow extends JFrame {
 
     ScreenMode screenMode = ScreenMode.MAIN;
 
-    final int WIDTH = 400;
-    final int HEIGHT = 400;
+    final int WIDTH = 800;
+    final int HEIGHT = 800;
 
     CardLayout layout = new CardLayout();
 
     MainPanel mainPanel;
+    TitlePanel titlePanel;
 
     MainWindow() {
         this.setTitle("タイトル設定");
@@ -37,9 +38,14 @@ public class MainWindow extends JFrame {
     }
 
     public void preparePanels() {
+        titlePanel = new TitlePanel();
+        titlePanel.prepareComponents();
+        this.add(titlePanel, "メイン画面");
+
         mainPanel = new MainPanel();
         this.add(mainPanel, "ゲーム画面");
-        this.pack();
+
+        this.pack(); // 1回だけで十分！
     }
 
     public void prepareComponents() {
@@ -51,8 +57,15 @@ public class MainWindow extends JFrame {
         switch (screenMode) {
             case MAIN:
                 layout.show(this.getContentPane(), "メイン画面");
-                mainPanel.requestFocus();
+                titlePanel.setFocusable(true);
+                titlePanel.requestFocusInWindow();
                 break;
+            case GAME:
+                layout.show(this.getContentPane(), "ゲーム画面");
+                mainPanel.setFocusable(true);
+                mainPanel.requestFocusInWindow();
+                break;
+
         }
     }
 }
