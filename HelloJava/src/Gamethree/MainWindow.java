@@ -13,8 +13,8 @@ public class MainWindow extends JFrame {
 
     ScreenMode screenMode = ScreenMode.MAIN;
 
-    final int WIDTH = 800;
-    final int HEIGHT = 800;
+    final int WIDTH = 400;
+    final int HEIGHT = 400;
 
     CardLayout layout = new CardLayout();
 
