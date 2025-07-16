@@ -1,111 +1,37 @@
 package DeskGameApp;
 
-// Swingライブラリをインポート（GUIコンポーネントを使用するため）
 import javax.swing.JFrame;
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 
-/**
- * デスクトップゲームアプリケーションのメインクラス
- * 
- * このクラスは、Java Swingを使用したデスクトップゲームアプリケーションの
- * エントリーポイント（開始点）として機能します。
- * 
- * 現在の実装状況：
- * - 基本的なウィンドウ表示 ✓
- * - レイアウトマネージャーの設定 ✓
- * - 複数コンポーネントの同時表示 ✓
- * - カスタムラベルとテキストエリアの統合 ✓
- * 
- * 次のステップ：
- * - ゲーム機能の実装
- * - キーボード入力処理
- * - マウスイベント処理
- * - アニメーション効果
- */
 public class Main {
 
-    /**
-     * プログラムのエントリーポイント（開始点）
-     * 
-     * このメソッドは、Javaアプリケーションの実行時に最初に呼び出されるメソッドです。
-     * アプリケーションの初期化、ウィンドウの作成、コンポーネントの配置を行います。
-     * 
-     * @param args コマンドライン引数（現在は使用していない）
-     * 
-     *             実行フロー：
-     *             1. コンソール出力（デバッグ用）
-     *             2. JFrameの作成と設定
-     *             3. レイアウトマネージャーの設定
-     *             4. カスタムコンポーネントの作成
-     *             5. コンポーネントの配置
-     *             6. ウィンドウの表示
-     */
     public static void main(String[] args) {
-        // コンソールに「Hello World」を出力（デバッグ用）
-        // プログラムが正常に開始されたことを確認するための出力
         System.out.println("Hello World");
 
-        // JFrameオブジェクトを作成（メインウィンドウ）
-        // JFrameは、デスクトップアプリケーションの最上位コンテナとして機能します
-        // タイトルバー、境界線、最小化/最大化/閉じるボタンを持ちます
         JFrame frame = new JFrame();
 
-        // ウィンドウの閉じるボタン（×）を押した時の動作を設定
-        // EXIT_ON_CLOSE: ウィンドウを閉じると同時にプログラムを終了
-        // これがないと、ウィンドウを閉じてもプログラムがバックグラウンドで実行され続けます
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // ウィンドウのサイズを設定（幅800ピクセル、高さ600ピクセル）
-        // ゲーム画面として適切なサイズを設定
-        // ピクセル単位で指定します
         frame.setSize(800, 600);
 
-        // ウィンドウを画面の中央に配置
-        // nullを指定すると、画面の中央に表示されます
-        // これにより、ユーザーがウィンドウを見つけやすくなります
         frame.setLocationRelativeTo(null);
 
-        // ウィンドウのタイトルバーに表示する文字を設定
-        // アプリケーションの名前を表示します
         frame.setTitle("Desk Game");
 
-        // ウィンドウのリサイズ（サイズ変更）を無効化
-        // falseにすることで、ユーザーがウィンドウサイズを変更できなくなります
-        // ゲームアプリケーションでは、固定サイズの方が適切な場合が多いです
         frame.setResizable(false);
 
-        // レイアウトマネージャーをFlowLayoutに変更（複数要素を横並びで表示）
-        // BorderLayout（デフォルト）では、最後に追加したコンポーネントのみが表示されます
-        // FlowLayoutでは、複数のコンポーネントが横並びで表示されます
-        // 画面幅を超えると自動的に改行されます
-        frame.setLayout(new FlowLayout());
+        frame.setLayout(new BorderLayout());
 
-        // MainLabelオブジェクトを作成（カスタムラベル）
-        // MainLabelは、JLabelを継承したカスタムクラスです
-        // 黒い背景に赤い文字で「Welcome to HELL!」を表示します
         MainLabel mainLabel = new MainLabel();
 
-        // MainTextAreaオブジェクトを作成（カスタムテキストエリア）
-        // MainTextAreaは、JTextAreaを継承したカスタムクラスです
-        // 青い背景に黒い文字のテキストエリアを表示します
+        MainButton mainButton = new MainButton();
+
         MainTextArea mainTextArea = new MainTextArea();
 
-        // ラベルとテキストエリアをフレームに追加
-        // FlowLayoutでは複数のコンポーネントが横並びで表示されます
-        // 追加順序は、表示順序に影響します
-        frame.add(mainLabel); // 左側に表示
-        frame.add(mainTextArea); // 右側に表示
+        frame.add(mainButton, BorderLayout.NORTH);
+        frame.add(mainLabel, BorderLayout.SOUTH);
+        frame.add(mainTextArea, BorderLayout.CENTER);
 
-        // ウィンドウを表示する
-        // この行を実行すると、実際にウィンドウが画面に表示されます
-        // この行は、すべての設定が完了した後に実行する必要があります
         frame.setVisible(true);
-
-        // ここでプログラムは終了せず、ウィンドウが表示されたまま待機状態になります
-        // ユーザーがウィンドウを閉じるまで、プログラムは実行され続けます
-        // これは、Swingアプリケーションの特徴的な動作です
-        //
-        // 注意：mainメソッドは終了しますが、Swingのイベントディスパッチスレッドが
-        // バックグラウンドで動作し続けるため、アプリケーションは継続して実行されます
     }
 }
