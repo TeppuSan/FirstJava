@@ -15,16 +15,23 @@
        │            ┌─────────────┐    ┌─────────────┐
        │            │             │    │             │
        └────────────│    GAME     │◀───│   RESULT    │
-                    │             │    │             │
+                    │  (リトライ) │    │             │
                     │  画面       │    │  画面       │
                     └─────────────┘    └─────────────┘
+                                        │
+                                        ▼
+                                 ┌─────────────┐
+                                 │             │
+                                 │   TITLE     │
+                                 │  画面       │
+                                 └─────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
 │                        遷移条件                                  │
 └─────────────────────────────────────────────────────────────────┘
 
-TITLE → GAME    : スペースキー押下 / スタートボタンクリック
-GAME  → RESULT : ゲーム終了条件達成（スコア到達 / 時間切れ）
+TITLE → GAME    : スタートボタンクリック
+GAME  → RESULT : ゲーム終了条件達成（時間切れ）
 RESULT → GAME  : リトライボタンクリック
 RESULT → TITLE : タイトルに戻るボタンクリック
 
@@ -35,14 +42,13 @@ RESULT → TITLE : タイトルに戻るボタンクリック
 TITLE画面:
 ├─ ゲームタイトル表示
 ├─ スタートボタン
-├─ 設定ボタン（オプション）
-└─ 終了ボタン
+└─ 最高得点表示
 
 GAME画面:
-├─ ゲームプレイエリア
-├─ スコア表示
-├─ タイマー表示
-└─ 一時停止ボタン
+├─ ゲームプレイエリア（クリックゲーム）
+├─ 現在スコア表示
+├─ タイマー表示（30秒カウントダウン）
+└─ クリックボタン
 
 RESULT画面:
 ├─ 最終スコア表示
@@ -54,17 +60,22 @@ RESULT画面:
 │                        CardLayout実装例                         │
 └─────────────────────────────────────────────────────────────────┘
 
-public class MainWindow extends JFrame [object Object]private CardLayout cardLayout;
+public class Main extends JFrame {
+    private CardLayout cardLayout;
+    private JPanel cardPanel;
     private TitlePanel titlePanel;
     private GamePanel gamePanel;
     private ResultPanel resultPanel;
     
     public void switchToTitle() {
-        cardLayout.show(getContentPane(), "TITLE); }
+        cardLayout.show(cardPanel, "TITLE");
+    }
     
     public void switchToGame() {
-        cardLayout.show(getContentPane(), "GAME); }
+        cardLayout.show(cardPanel, "GAME");
+    }
     
     public void switchToResult() {
-        cardLayout.show(getContentPane(),RESULT");
+        cardLayout.show(cardPanel, "RESULT");
     }
+}
