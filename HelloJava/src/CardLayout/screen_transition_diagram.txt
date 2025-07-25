@@ -78,4 +78,4 @@ public class Main extends JFrame {
     public void switchToResult() {
         cardLayout.show(cardPanel, "RESULT");
     }
-}
+    }
