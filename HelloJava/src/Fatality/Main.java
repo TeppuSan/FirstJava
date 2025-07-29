@@ -14,10 +14,17 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        
-        String url = "jdbc:postgresql://localhost:5432/d_test";
-        String user = "postgres";
-        String password = "";
+
+        System.out.println("データベース名を入力してください");
+        String inputdb = scanner.nextLine();
+        System.out.println("ユーザー名を入力してください");
+        String inputuser = scanner.nextLine();
+        System.out.println("パスワードを入力してください");
+        String inputpassword = scanner.nextLine();
+
+        String url = "jdbc:postgresql://localhost:5432/" + inputdb;
+        String user = inputuser;
+        String password = inputpassword;
 
         int i = 1;
         
@@ -71,9 +78,11 @@ public class Main {
                                 }
                                 try (ResultSet contentTable = conn.createStatement().executeQuery(tableSql)) {
                                     System.out.println("--- テーブル内容 ---");
+                                    System.out.println(String.join(" | ", columnNames));
+                                    System.out.println("-----------------------");
                                     while (contentTable.next()) {//contentTableの中身を一つずつ取り出す
                                         for (String columnName : columnNames) {//この処理はcolumnNamesの数だけ繰り返す
-                                            System.out.print(contentTable.getString(columnName) + " ");
+                                            System.out.print(contentTable.getString(columnName) + " | ");
                                         }
                                         System.out.println();
                                     }
@@ -84,9 +93,17 @@ public class Main {
                     }
                     
                     //SQLに変更を加える場合はここに入力
-                    System.out.println("INSERT:DELETE:UPDATE");
-                    System.out.println("(上記のコマンドにてテーブル内容に変更を加える場合)SQL文を入力してください");
+                    System.out.println("INSERT : DELETE : UPDATE");
+                    System.out.println("(helpにて上記のSQL文の入力例の一覧が表示されます)");
+                    System.out.println("(変更する場合)SQL文を入力してください");
                     String updateSql = scanner.hasNextLine() ? scanner.nextLine() : "";
+                    while (updateSql.equals("help")) {
+                        System.out.println("INSERT INTO テーブル名 (カラム名1, カラム名2, ...) VALUES (値1, 値2, ...)");
+                        System.out.println("DELETE FROM テーブル名 WHERE カラム名 = 値");
+                        System.out.println("UPDATE テーブル名 SET カラム名1 = 値1, カラム名2 = 値2, ... WHERE カラム名 = 値");
+                        System.out.println("(変更する場合)SQL文を入力してください");
+                        updateSql = scanner.hasNextLine() ? scanner.nextLine() : "";
+                    }
                     if (!updateSql.equals("")) {
                         try {
                             Statement userInputStatement = conn.createStatement();
